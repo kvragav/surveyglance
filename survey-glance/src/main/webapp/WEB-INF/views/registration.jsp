@@ -133,36 +133,42 @@
 												<label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> <form:input path="regemail"
 															 type="email" class="form-control" placeholder="Email"
-															  cssErrorClass="form-control border-red"/> <i
+															  cssErrorClass="form-control border-red"/> 
+															  <form:errors path="regemail"  type="email" class="form-group has-warning has-feedback"/><i
 														class="ace-icon fa fa-envelope"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> <form:input
 															path="regusername" type="text" cssErrorClass="form-control border-red"
-															class="form-control" placeholder="Username" size="8" /> <i
+															class="form-control" placeholder="Username" size="8" /> 
+															 <form:errors path="regusername"  type="text" class="form-group has-warning has-feedback"/><i
 														class="ace-icon fa fa-user"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> <form:input
 															path="regpassword" type="password" cssErrorClass="form-control border-red"
 															class="form-control" size="8" placeholder="Password" />
-														<i class="ace-icon fa fa-lock"></i>
+															<form:errors path="regpassword"  type="text" class="form-group has-warning has-feedback"/><i
+														class="ace-icon fa fa-lock"></i>
 												</span>
 												</label> <label class="block clearfix"> <span
 													class="block input-icon input-icon-right"> <form:input
 															path="confirmreppassword"  type="password"
 															class="form-control" size="8" cssErrorClass="form-control border-red"
-															placeholder="Repeat password" /> <i
+															placeholder="Repeat password" /> 
+															 <form:errors path="confirmreppassword"  type="text" class="form-group has-warning has-feedback"/><i
 														class="ace-icon fa fa-retweet"></i>
 												</span>
 												</label>
 												<label class="block">
-												<form:radiobutton path="agreement" cssClass="ace" value="" cssErrorClass="ace border-red"/>
+												<input type="radio" name="agreement" id="agreement" cssClass="ace" value="yes" cssErrorClass="ace border-red"/>
 													<!-- <input type="checkbox" class="ace" /> -->
-													<span class="lbl"> I accept the <a href="#">User Agreement</a>
+													<span class="lbl"> I accept the <a href="#">User Agreement.</a>
 													</span>
+													<br/>
+													<form:errors path="agreement"  type="agreement" color="red"/>
 												</label>
-
+												
 												<div class="space-24"></div>
 
 												<div class="clearfix">

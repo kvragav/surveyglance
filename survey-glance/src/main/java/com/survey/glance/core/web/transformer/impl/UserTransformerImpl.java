@@ -47,7 +47,7 @@ public class UserTransformerImpl<E, T> implements IGenericTransformer<E, T> {
 		user.setEmail(registerFormTO.getRegemail());
 		user.setSsoId(registerFormTO.getRegusername());
 		user.setPassword(registerFormTO.getRegpassword());
-		user.setFirstName("sample");
+		user.setFirstName(registerFormTO.getRegusername());
 		user.setLastName("sample");
 		user.setState(State.ACTIVE.getState());
 		return (E) user;

@@ -10,7 +10,7 @@ public class RegisterFormTO {
 	private String regemail;
 	private String regpassword;
 	private String confirmreppassword;
-	private String agreement;
+	private String agreement = "no";
 
 	public String getRegusername() {
 		return regusername;
@@ -50,6 +50,12 @@ public class RegisterFormTO {
 
 	public void setAgreement(String agreement) {
 		this.agreement = agreement;
+	}
+
+	@Override
+	public String toString() {
+		return "RegisterFormTO [regusername=" + regusername + ", regemail=" + regemail + ", regpassword=" + regpassword
+				+ ", confirmreppassword=" + confirmreppassword + ", agreement=" + agreement + "]";
 	}
 
 }

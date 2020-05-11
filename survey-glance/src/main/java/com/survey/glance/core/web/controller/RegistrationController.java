@@ -2,6 +2,7 @@ package com.survey.glance.core.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -53,17 +54,23 @@ public class RegistrationController extends AbstractController {
 			final BindingResult result, ModelMap model) {
 		registerFormValidator.validate(regForm, result);
 		if (result.hasErrors()) {
-			System.out.println("In error");
+			System.out.println("form validation error");
 			return "registration";
 		}
 		final User user = userTransformerImpl.transformTOToEntity(regForm);
+		
+		System.out.println("after user transformation" + userServiceImpl.find(user));
+		
 		if (null == userServiceImpl.find(user)) {
 			final UserProfile userProfile = userProfileServiceImpl
 					.findByType(UserProfileType.USER.getUserProfileType());
 			user.getUserProfiles().add(userProfile);
 			userServiceImpl.createUser(user);
 		} else {
+			
 			return "registration";
+			
+			
 		}
 		return "redirect:/login?success";
 	}

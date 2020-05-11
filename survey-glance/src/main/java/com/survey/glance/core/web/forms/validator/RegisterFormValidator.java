@@ -3,6 +3,7 @@ package com.survey.glance.core.web.forms.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -31,8 +32,9 @@ public class RegisterFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		final RegisterFormTO regForm = (RegisterFormTO) target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "regemail",
-				"required.regemail", "Email is required.");
+		System.out.println("agreemt	 -->" + regForm.toString());
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "regemail","required.regemail", "Email is required.");
 		
 		// email validation in spring
 		if (!(regForm.getRegemail() != null && regForm.getRegemail().isEmpty())) {
@@ -44,15 +46,12 @@ public class RegisterFormValidator implements Validator {
 			}
 		}
 		
-		ValidationUtils.rejectIfEmpty(errors, "regusername", "required.regusername",
-				"Username is required.");
-		ValidationUtils.rejectIfEmpty(errors, "regpassword", "required.regpassword",
-				"Password is required.");
-		ValidationUtils.rejectIfEmpty(errors, "confirmreppassword", "required.confirmreppassword",
-				"Confirm password is required.");
+		ValidationUtils.rejectIfEmpty(errors, "regusername", "required.regusername","Username is required.");
+		ValidationUtils.rejectIfEmpty(errors, "regpassword", "required.regpassword","Password is required.");
+		ValidationUtils.rejectIfEmpty(errors, "confirmreppassword", "required.confirmreppassword","Confirm password is required.");
 		
-		if (regForm.getAgreement()!=null) {
-			errors.rejectValue("agreement", "required.agreement", "User Agreement must be accepted");
+		if (regForm.getAgreement()!=null && StringUtils.equalsIgnoreCase(regForm.getAgreement(), "no")) {
+			errors.rejectValue("agreement", "required.agreement", "Please read and accept the user agreement");
 		}
 		
 		/*ValidationUtils.rejectIfEmptyOrWhitespace(errors, "agreement",
@@ -109,6 +108,12 @@ public class RegisterFormValidator implements Validator {
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",
 				"required.password", "Password is required.");*/
+		
+		if (regForm.getRegpassword() != null && ( regForm.getRegpassword().length() < 8 || regForm.getRegpassword().length() > 12) )
+		{
+			errors.rejectValue("confirmreppassword", "password.mismatch",
+					"Password size should be between 8 and 12 characters");
+		}
 
 		// password matching validation
 		if (regForm.getRegpassword() != null && regForm.getConfirmreppassword() != null && 
@@ -125,8 +130,6 @@ public class RegisterFormValidator implements Validator {
 		// text area validation
 		ValidationUtils.rejectIfEmpty(errors, "overview", "required.overview",
 				"Overview is required.");*/
-
-		
 
 	}
 

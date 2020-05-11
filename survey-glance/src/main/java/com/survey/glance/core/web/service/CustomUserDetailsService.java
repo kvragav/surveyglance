@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		final User user = userService.findBySso(ssoId);
 		System.out.println("User : " + user);
-		LOG.debug("User : "+user);
+		LOG.debug("User  : "+user);
 		if (user == null) {
 			LOG.debug("User not found");
 			throw new UsernameNotFoundException("Username not found");
